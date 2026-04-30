@@ -1,0 +1,27 @@
+kind = "mobile"
+previewPath = "/"
+title = "Calakmul Explore"
+version = "1.0.0"
+id = "artifacts/calakmul-explore"
+router = "expo-domain"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+ensurePreviewReachable = "/status"
+name = "expo"
+paths = [ "/" ]
+localPort = 23417
+
+[services.development]
+run = "pnpm --filter @workspace/calakmul-explore run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/calakmul-explore", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/calakmul-explore", "run", "serve" ]
+
+[services.env]
+PORT = "23417"
+BASE_PATH = "/"

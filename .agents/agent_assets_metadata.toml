@@ -1,0 +1,50 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "eqUOVzDX7JWz7ndkRA9hZ"
+uri = "file://artifacts/calakmul-explore/assets/images/icon.png"
+type = "image"
+title = "calakmul icon"
+
+[[generated]]
+id = "feFUVmQ3wSmUCuCJz4Owy"
+uri = "file://artifacts/calakmul-explore/assets/images/hero_calakmul.png"
+type = "image"
+title = "calakmul hero pyramid"
+
+[[generated]]
+id = "YDlaVQApWEvFZ3nyTTwno"
+uri = "file://artifacts/calakmul-explore/assets/images/bat_cave.png"
+type = "image"
+title = "bat cave sunset"
+
+[[generated]]
+id = "P5yOw9zj5QHj_lvC4hu5p"
+uri = "file://artifacts/calakmul-explore/assets/images/hotel.png"
+type = "image"
+title = "jungle eco hotel"
+
+[[generated]]
+id = "9vdWIlBaunFppMkMad1ij"
+uri = "file://artifacts/calakmul-explore/assets/images/balamku.png"
+type = "image"
+title = "balamku ruins"
+
+[[generated]]
+id = "u6tokarOCDL-gf4Us9R7g"
+uri = "file://artifacts/calakmul-explore/assets/images/transport.png"
+type = "image"
+title = "jungle transport"
+
+[[generated]]
+id = "hezg7zWayRcW9iLkdqE1e"
+uri = "file://artifacts/calakmul-explore/assets/images/tour.png"
+type = "image"
+title = "jungle tour"
+
+[[generated]]
+id = "r768zWdOeLfezqCNHRaj8"
+uri = "file://artifacts/calakmul-explore/assets/images/packages.png"
+type = "image"
+title = "travel packages"
