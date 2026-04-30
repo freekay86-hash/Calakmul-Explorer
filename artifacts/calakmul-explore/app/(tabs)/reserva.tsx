@@ -1,27 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
 import { View, StyleSheet, ScrollView, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColors } from "@/hooks/useColors";
-import { useRouter } from "expo-router";
 import MiniHeader from "@/components/MiniHeader";
-import HeroSection from "@/components/HeroSection";
+import ReservaSection from "@/components/ReservaSection";
 
-export default function InicioScreen() {
+export default function ReservaScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
-  const router = useRouter();
   const tabBarH = Platform.OS === "web" ? 84 : 50 + insets.bottom;
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <MiniHeader title="Inicio" />
+    <View style={[styles.root, { backgroundColor: colors.sectionBg2 }]}>
+      <MiniHeader title="Reserva" />
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={{ paddingBottom: tabBarH + 10 }}
         showsVerticalScrollIndicator={false}
-        bounces={false}
       >
-        <HeroSection onExplorePress={() => router.push("/(tabs)/destinos")} />
+        <ReservaSection />
       </ScrollView>
     </View>
   );
