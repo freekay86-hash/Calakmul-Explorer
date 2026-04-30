@@ -1,20 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Animated,
   PanResponder,
+  Platform,
 } from "react-native";
+import { Image } from "expo-image";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
 import SectionTitle from "./SectionTitle";
+import WildlifeTrack from "./WildlifeTrack";
 
 const FEATURES = [
   {
     icon: "award" as const,
     title: "Experiencia Certificada",
-    desc: "Guías locales certificados con más de 10 años de experiencia en la zona maya.",
+    desc: "Guías locales certificados con más de 10 años explorando Calakmul.",
   },
   {
     icon: "shield" as const,
@@ -29,7 +32,7 @@ const FEATURES = [
   {
     icon: "heart" as const,
     title: "Turismo Responsable",
-    desc: "Comprometidos con la conservación de la biosfera y las comunidades locales.",
+    desc: "Comprometidos con la conservación de la biosfera de Calakmul.",
   },
 ];
 
@@ -47,16 +50,17 @@ export default function NosotrosSection() {
       rotX.setValue(y);
     },
     onPanResponderRelease: () => {
-      Animated.spring(rotX, { toValue: 0, useNativeDriver: true }).start();
-      Animated.spring(rotY, { toValue: 0, useNativeDriver: true }).start();
+      Animated.spring(rotX, { toValue: 0, useNativeDriver: Platform.OS !== "web" }).start();
+      Animated.spring(rotY, { toValue: 0, useNativeDriver: Platform.OS !== "web" }).start();
     },
   });
 
   return (
-    <View style={[styles.section, { backgroundColor: colors.sectionBg1 }]}>
+    <View style={[styles.section, { backgroundColor: colors.sectionBg2 }]}>
+      <WildlifeTrack color="#2d9e5f" opacity={0.1} />
       <SectionTitle
         title="¿Quiénes Somos?"
-        subtitle="Tu aliado perfecto para explorar la grandeza de Calakmul"
+        subtitle="Tu aliado perfecto para explorar la grandeza de Calakmul, Campeche"
       />
 
       <Animated.View
@@ -66,28 +70,42 @@ export default function NosotrosSection() {
           {
             backgroundColor: colors.card,
             borderColor: colors.border,
-            transform: [
-              { perspective: 800 },
-            ],
           },
         ]}
       >
-        <View style={[styles.cardHeader, { backgroundColor: colors.primary }]}>
-          <Feather name="compass" size={28} color="#ffffff" />
-          <Text style={styles.cardHeaderTitle}>Calakmul Explore</Text>
+        <Image
+          source={require("@/assets/images/aerial_jungle.jpeg")}
+          style={styles.cardImg}
+          contentFit="cover"
+        />
+        <View style={[styles.cardImgOverlay, { backgroundColor: colors.primary }]}>
+          <Feather name="compass" size={22} color="#ffffff" />
+          <Text style={styles.cardImgText}>Calakmul Explore</Text>
         </View>
         <View style={styles.cardBody}>
           <Text style={[styles.cardText, { color: colors.foreground }]}>
-            Somos una empresa 100% local dedicada a ofrecer experiencias auténticas e inolvidables en la Reserva de la Biosfera de Calakmul. Nuestro equipo de guías nativos te llevará a descubrir los secretos de la antigua civilización maya y la espectacular biodiversidad de la selva campeche.
+            Somos una empresa 100% local dedicada a ofrecer experiencias auténticas en la Reserva de la Biosfera de Calakmul, Campeche. Nuestro equipo de guías nativos te llevará a descubrir los secretos de la civilización maya y la espectacular biodiversidad de la selva.
           </Text>
         </View>
       </Animated.View>
+
+      <View style={styles.wildPhoto}>
+        <Image
+          source={require("@/assets/images/monkeys_tree.jpeg")}
+          style={styles.wildPhotoImg}
+          contentFit="cover"
+        />
+        <View style={[styles.wildPhotoTag, { backgroundColor: colors.primary }]}>
+          <Feather name="camera" size={13} color="#fff" />
+          <Text style={styles.wildPhotoTagText}>Fauna silvestre en Calakmul</Text>
+        </View>
+      </View>
 
       <View style={styles.featuresGrid}>
         {FEATURES.map((f, i) => (
           <View
             key={i}
-            style={[styles.featureCard, { backgroundColor: colors.muted, borderColor: colors.border }]}
+            style={[styles.featureCard, { backgroundColor: colors.card, borderColor: colors.border }]}
           >
             <View style={[styles.featureIcon, { backgroundColor: colors.primary }]}>
               <Feather name={f.icon} size={20} color="#ffffff" />
@@ -105,37 +123,64 @@ const styles = StyleSheet.create({
   section: {
     paddingHorizontal: 20,
     paddingVertical: 36,
+    overflow: "hidden",
   },
   card: {
     borderRadius: 16,
     borderWidth: 1,
     overflow: "hidden",
-    marginBottom: 24,
-    shadowColor: "#000",
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
+    marginBottom: 16,
     elevation: 3,
   },
-  cardHeader: {
+  cardImg: {
+    width: "100%",
+    height: 160,
+  },
+  cardImgOverlay: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    gap: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
   },
-  cardHeaderTitle: {
+  cardImgText: {
     color: "#ffffff",
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Inter_700Bold",
   },
   cardBody: {
-    padding: 20,
+    padding: 18,
   },
   cardText: {
     fontSize: 14,
     fontFamily: "Inter_400Regular",
     lineHeight: 22,
+  },
+  wildPhoto: {
+    borderRadius: 14,
+    overflow: "hidden",
+    marginBottom: 20,
+    height: 130,
+  },
+  wildPhotoImg: {
+    width: "100%",
+    height: "100%",
+  },
+  wildPhotoTag: {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+  },
+  wildPhotoTagText: {
+    color: "#fff",
+    fontSize: 11,
+    fontFamily: "Inter_600SemiBold",
   },
   featuresGrid: {
     flexDirection: "row",

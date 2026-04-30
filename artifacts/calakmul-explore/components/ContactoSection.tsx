@@ -9,13 +9,27 @@ import {
 import { Image } from "expo-image";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
-import SectionTitle from "./SectionTitle";
+import WildlifeTrack from "./WildlifeTrack";
 
 export default function ContactoSection() {
   const colors = useColors();
 
   return (
     <View style={[styles.section, { backgroundColor: colors.navBackground }]}>
+      <WildlifeTrack color="#52c87a" opacity={0.15} />
+
+      <View style={styles.photosRow}>
+        <View style={styles.photoThumb}>
+          <Image source={require("@/assets/images/chicanna_facade.jpeg")} style={styles.photoThumbImg} contentFit="cover" />
+        </View>
+        <View style={styles.photoThumb}>
+          <Image source={require("@/assets/images/pyramid_top_view.jpeg")} style={styles.photoThumbImg} contentFit="cover" />
+        </View>
+        <View style={styles.photoThumb}>
+          <Image source={require("@/assets/images/lagoon.jpeg")} style={styles.photoThumbImg} contentFit="cover" />
+        </View>
+      </View>
+
       <View style={styles.logoWrap}>
         <Image
           source={require("@/assets/images/logo.png")}
@@ -23,7 +37,8 @@ export default function ContactoSection() {
           contentFit="contain"
         />
         <Text style={styles.brand}>Calakmul Explore</Text>
-        <Text style={styles.tagline}>Tu aventura maya comienza aquí</Text>
+        <Text style={styles.tagline}>Calakmul, Campeche, México</Text>
+        <Text style={styles.taglineSub}>Tu aventura maya comienza aquí</Text>
       </View>
 
       <View style={styles.divider} />
@@ -59,10 +74,10 @@ export default function ContactoSection() {
 
       <View style={styles.infoBlock}>
         {[
-          { icon: "map-pin" as const, text: "Xpujil, Campeche, México" },
+          { icon: "map-pin" as const, text: "Calakmul, Campeche, México" },
           { icon: "phone" as const, text: "+52 982 105 3064" },
           { icon: "mail" as const, text: "info@calakmulexplore.com" },
-          { icon: "clock" as const, text: "Lun - Dom: 6:00am - 8:00pm" },
+          { icon: "clock" as const, text: "Lun - Dom: 5:00am - 7:00pm" },
         ].map((item, i) => (
           <View key={i} style={styles.infoRow}>
             <Feather name={item.icon} size={16} color={colors.accent} />
@@ -81,12 +96,28 @@ export default function ContactoSection() {
 
 const styles = StyleSheet.create({
   section: {
-    paddingVertical: 40,
-    paddingHorizontal: 24,
+    paddingVertical: 36,
+    paddingHorizontal: 20,
+    overflow: "hidden",
+  },
+  photosRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 24,
+  },
+  photoThumb: {
+    flex: 1,
+    height: 90,
+    borderRadius: 12,
+    overflow: "hidden",
+  },
+  photoThumbImg: {
+    width: "100%",
+    height: "100%",
   },
   logoWrap: {
     alignItems: "center",
-    marginBottom: 28,
+    marginBottom: 24,
   },
   logo: {
     width: 90,
@@ -100,8 +131,14 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   tagline: {
-    color: "rgba(255,255,255,0.55)",
+    color: "#7ed6a8",
     fontSize: 13,
+    fontFamily: "Inter_600SemiBold",
+    marginBottom: 2,
+  },
+  taglineSub: {
+    color: "rgba(255,255,255,0.5)",
+    fontSize: 12,
     fontFamily: "Inter_400Regular",
   },
   divider: {

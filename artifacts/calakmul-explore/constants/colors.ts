@@ -1,42 +1,42 @@
 const colors = {
   light: {
-    text: "#0f2418",
-    tint: "#1a6b3c",
+    text: "#1a3a28",
+    tint: "#2d9e5f",
 
-    background: "#f0f7f4",
-    foreground: "#0f2418",
+    background: "#f4fbf7",
+    foreground: "#1a3a28",
 
     card: "#ffffff",
-    cardForeground: "#0f2418",
+    cardForeground: "#1a3a28",
 
-    primary: "#1a6b3c",
+    primary: "#2d9e5f",
     primaryForeground: "#ffffff",
 
-    secondary: "#1e7a8a",
+    secondary: "#3abf8a",
     secondaryForeground: "#ffffff",
 
-    muted: "#e0ede7",
-    mutedForeground: "#4a7a5c",
+    muted: "#e6f5ec",
+    mutedForeground: "#5a8a6e",
 
-    accent: "#2a9d6f",
+    accent: "#52c87a",
     accentForeground: "#ffffff",
 
     destructive: "#ef4444",
     destructiveForeground: "#ffffff",
 
-    border: "#c8dfd4",
-    input: "#c8dfd4",
+    border: "#b8dfc8",
+    input: "#b8dfc8",
 
-    heroOverlay: "rgba(15, 36, 24, 0.55)",
-    cardGradientStart: "#1a6b3c",
-    cardGradientEnd: "#1e7a8a",
-    navBackground: "rgba(15, 36, 24, 0.95)",
+    heroOverlay: "rgba(10, 28, 18, 0.48)",
+    navBackground: "rgba(18, 52, 34, 0.97)",
     sectionBg1: "#ffffff",
-    sectionBg2: "#e8f5ee",
-    sectionBg3: "#e0f0f5",
+    sectionBg2: "#edf8f2",
+    sectionBg3: "#e3f5eb",
+    sectionBgDark: "#1e6644",
+    sectionBgMedium: "#2d9e5f",
   },
 
-  radius: 12,
+  radius: 14,
 };
 
 export default colors;

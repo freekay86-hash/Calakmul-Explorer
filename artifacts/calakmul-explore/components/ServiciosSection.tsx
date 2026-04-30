@@ -7,11 +7,13 @@ import {
   ScrollView,
   Animated,
   Dimensions,
+  Platform,
 } from "react-native";
 import { Image } from "expo-image";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
 import SectionTitle from "./SectionTitle";
+import WildlifeTrack from "./WildlifeTrack";
 
 const { width: W } = Dimensions.get("window");
 const CARD_W = W * 0.72;
@@ -21,11 +23,11 @@ const SERVICES = [
     id: "transporte",
     label: "Transporte",
     icon: "truck" as const,
-    description: "Traslados cómodos y seguros desde Xpujil, Escárcega o Chetumal hasta la zona arqueológica en vehículos 4x4.",
+    description: "Traslados cómodos y seguros desde Xpujil o Escárcega hasta la zona arqueológica en vehículos especializados para la selva.",
     images: [
-      require("@/assets/images/transport.png"),
-      require("@/assets/images/transport.png"),
-      require("@/assets/images/transport.png"),
+      require("@/assets/images/transport_carts.jpeg"),
+      require("@/assets/images/transport_bus.jpeg"),
+      require("@/assets/images/tour_group.jpeg"),
     ],
     tag: "Disponible todo el año",
   },
@@ -33,11 +35,11 @@ const SERVICES = [
     id: "tours",
     label: "Tours",
     icon: "map" as const,
-    description: "Tours guiados por la zona arqueológica de Calakmul, Balamkú, Chicannà y la Cueva de los Murciélagos.",
+    description: "Tours guiados por la zona arqueológica de Calakmul, Balamkú, Chicannà y los increíbles cuerpos de agua de la biosfera.",
     images: [
-      require("@/assets/images/tour.png"),
-      require("@/assets/images/bat_cave.png"),
-      require("@/assets/images/balamku.png"),
+      require("@/assets/images/tour_group.jpeg"),
+      require("@/assets/images/ruins_entrance.jpeg"),
+      require("@/assets/images/lagoon.jpeg"),
     ],
     tag: "Guía certificado incluido",
   },
@@ -45,11 +47,11 @@ const SERVICES = [
     id: "paquetes",
     label: "Paquetes",
     icon: "package" as const,
-    description: "Paquetes todo incluido con hospedaje, alimentación, transporte y guía profesional por 2 o 3 días.",
+    description: "Paquetes todo incluido con hospedaje, alimentación, transporte y guía profesional por 2 o 3 días en Calakmul, Campeche.",
     images: [
-      require("@/assets/images/packages.png"),
-      require("@/assets/images/hotel.png"),
-      require("@/assets/images/tour.png"),
+      require("@/assets/images/pyramid_top_view.jpeg"),
+      require("@/assets/images/aerial_jungle.jpeg"),
+      require("@/assets/images/monkeys_tree.jpeg"),
     ],
     tag: "Todo incluido",
   },
@@ -66,14 +68,14 @@ export default function ServiciosSection() {
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 200,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== "web",
     }).start(() => {
       setActiveService(idx);
       setActiveImg(0);
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 250,
-        useNativeDriver: true,
+        useNativeDriver: Platform.OS !== "web",
       }).start();
     });
   };
@@ -81,11 +83,12 @@ export default function ServiciosSection() {
   const service = SERVICES[activeService];
 
   return (
-    <View style={[styles.section, { backgroundColor: colors.sectionBg2 }]}>
+    <View style={[styles.section, { backgroundColor: colors.sectionBg3 }]}>
+      <WildlifeTrack color="#2d9e5f" opacity={0.09} />
       <View style={styles.titleWrap}>
         <SectionTitle
           title="Nuestros Servicios"
-          subtitle="Todo lo que necesitas para una aventura perfecta"
+          subtitle="Todo lo que necesitas para una aventura perfecta en Calakmul"
         />
       </View>
 
@@ -189,6 +192,7 @@ export default function ServiciosSection() {
 const styles = StyleSheet.create({
   section: {
     paddingVertical: 36,
+    overflow: "hidden",
   },
   titleWrap: {
     paddingHorizontal: 20,
@@ -244,10 +248,6 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 1,
     padding: 18,
-    shadowColor: "#000",
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
     elevation: 2,
   },
   tagRow: {

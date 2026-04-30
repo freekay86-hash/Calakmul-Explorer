@@ -19,51 +19,56 @@ const DESTINOS = [
     id: "calakmul",
     titulo: "Calakmul",
     texto:
-      "Majestuosa ciudad maya declarada Patrimonio de la Humanidad. Sus pirámides emergen entre la selva y ofrecen vistas impresionantes de la biosfera.",
-    imagen: require("@/assets/images/hero_calakmul.png"),
+      "Majestuosa ciudad maya declarada Patrimonio de la Humanidad. Sus pirámides emergen entre la selva de Campeche y ofrecen vistas impresionantes de la biosfera hasta el horizonte.",
+    imagen: require("@/assets/images/pyramid_front.jpeg"),
+    imagenExtra: require("@/assets/images/aerial_jungle.jpeg"),
     distancia: "60 km desde Xpujil",
     duracion: "Todo el día",
     dificultad: "Moderada",
   },
   {
-    id: "murcielagos",
-    titulo: "Cueva de los Murciélagos",
+    id: "chicanna",
+    titulo: "Chicannà",
     texto:
-      "Espectáculo natural único al atardecer. Millones de murciélagos emergen en espiral hacia el cielo formando un tornado viviente.",
-    imagen: require("@/assets/images/bat_cave.png"),
-    distancia: "45 km desde Xpujil",
-    duracion: "Tarde/Noche",
+      "Sitio arqueológico con impresionantes fachadas de monstruos de la tierra. Sus elaboradas máscaras de piedra representan la entrada al inframundo maya.",
+    imagen: require("@/assets/images/chicanna_facade.jpeg"),
+    imagenExtra: require("@/assets/images/chicanna2.jpeg"),
+    distancia: "12 km desde Xpujil",
+    duracion: "Medio día",
     dificultad: "Fácil",
-  },
-  {
-    id: "hotel",
-    titulo: "Hotel Mundo Maya",
-    texto:
-      "Comodidad y naturaleza en perfecta armonía en medio de la selva. El lugar ideal para descansar después de explorar.",
-    imagen: require("@/assets/images/hotel.png"),
-    distancia: "5 km desde Xpujil",
-    duracion: "Estadía",
-    dificultad: "Sin dificultad",
   },
   {
     id: "balamku",
     titulo: "Balamkú",
     texto:
-      "Sitio arqueológico rodeado de historia y misterio. Famoso por su extraordinario friso estucado de 17 metros de largo.",
-    imagen: require("@/assets/images/balamku.png"),
+      "Sitio arqueológico famoso por su extraordinario friso estucado de 17 metros. Alberga tallados únicos de ranas, cocodrilos y figuras humanas emergiendo de las fauces de la tierra.",
+    imagen: require("@/assets/images/mayan_door.jpg"),
+    imagenExtra: require("@/assets/images/ruins_entrance.jpeg"),
     distancia: "55 km desde Xpujil",
     duracion: "Medio día",
     dificultad: "Fácil",
   },
   {
-    id: "otros",
-    titulo: "Otros Destinos",
+    id: "laguna",
+    titulo: "Lagunas de la Biosfera",
     texto:
-      "Chicannà, Becán, Hormiguero y más sitios arqueológicos únicos en la región Río Bec de Campeche.",
-    imagen: require("@/assets/images/tour.png"),
-    distancia: "Varios",
-    duracion: "Varios",
-    dificultad: "Variable",
+      "Cuerpos de agua cristalinos en el corazón de la selva de Calakmul. Paraíso para la observación de aves acuáticas, caimanes y la exuberante flora tropical.",
+    imagen: require("@/assets/images/lagoon.jpeg"),
+    imagenExtra: require("@/assets/images/monkeys_tree.jpeg"),
+    distancia: "Dentro de la biosfera",
+    duracion: "Mañana",
+    dificultad: "Fácil",
+  },
+  {
+    id: "xpuhil",
+    titulo: "Xpuhil y Becán",
+    texto:
+      "Sitios arqueológicos de la región Río Bec con torres altísimas que imitan pirámides. Becán, conocido como la ciudad rodeada por agua, tiene un foso defensivo único en el mundo maya.",
+    imagen: require("@/assets/images/xpuhil_ruins.png"),
+    imagenExtra: require("@/assets/images/pyramid_top_view.jpeg"),
+    distancia: "En Xpujil / 8 km",
+    duracion: "Medio día",
+    dificultad: "Fácil",
   },
 ];
 
@@ -77,7 +82,7 @@ export default function DestinosSection() {
       <View style={styles.titleWrap}>
         <SectionTitle
           title="Destinos"
-          subtitle="Explora los lugares más impresionantes de la región"
+          subtitle="Los lugares más impresionantes de Calakmul, Campeche"
         />
       </View>
 
@@ -118,13 +123,13 @@ export default function DestinosSection() {
             source={dest.imagen}
             style={styles.mainImage}
             contentFit="cover"
-            transition={300}
+            transition={350}
           />
           <View style={[StyleSheet.absoluteFill, styles.imageOverlay]} />
           <View style={styles.imageContent}>
             <Text style={styles.mainTitle}>{dest.titulo}</Text>
             <View style={styles.distRow}>
-              <Feather name="map-pin" size={13} color="rgba(255,255,255,0.8)" />
+              <Feather name="map-pin" size={13} color="rgba(255,255,255,0.85)" />
               <Text style={styles.distText}>{dest.distancia}</Text>
             </View>
           </View>
@@ -132,6 +137,16 @@ export default function DestinosSection() {
 
         <View style={[styles.infoPanel, { backgroundColor: colors.card }]}>
           <Text style={[styles.destText, { color: colors.foreground }]}>{dest.texto}</Text>
+
+          <View style={[styles.extraImg]}>
+            <Image
+              key={dest.id + "_extra"}
+              source={dest.imagenExtra}
+              style={styles.extraImgInner}
+              contentFit="cover"
+              transition={300}
+            />
+          </View>
 
           <View style={styles.metaRow}>
             <View style={[styles.metaChip, { backgroundColor: colors.sectionBg2 }]}>
@@ -175,10 +190,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 18,
     overflow: "hidden",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
     elevation: 4,
   },
   imageContainer: {
@@ -190,7 +201,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   imageOverlay: {
-    backgroundColor: "rgba(15,36,24,0.3)",
+    backgroundColor: "rgba(10,28,18,0.38)",
   },
   imageContent: {
     position: "absolute",
@@ -209,7 +220,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   distText: {
-    color: "rgba(255,255,255,0.8)",
+    color: "rgba(255,255,255,0.85)",
     fontSize: 12,
     fontFamily: "Inter_400Regular",
   },
@@ -220,7 +231,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Inter_400Regular",
     lineHeight: 21,
-    marginBottom: 16,
+    marginBottom: 14,
+  },
+  extraImg: {
+    height: 120,
+    borderRadius: 12,
+    overflow: "hidden",
+    marginBottom: 14,
+  },
+  extraImgInner: {
+    width: "100%",
+    height: "100%",
   },
   metaRow: {
     flexDirection: "row",

@@ -8,11 +8,11 @@ import {
   Dimensions,
   Platform,
 } from "react-native";
-const IS_WEB = Platform.OS === "web";
 import { Image } from "expo-image";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
 
+const IS_WEB = Platform.OS === "web";
 const { width: W, height: H } = Dimensions.get("window");
 
 interface HeroSectionProps {
@@ -23,7 +23,6 @@ export default function HeroSection({ onExplorePress }: HeroSectionProps) {
   const colors = useColors();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(40)).current;
-  const scaleAnim = useRef(new Animated.Value(1.05)).current;
 
   useEffect(() => {
     Animated.parallel([
@@ -37,23 +36,16 @@ export default function HeroSection({ onExplorePress }: HeroSectionProps) {
         duration: 800,
         useNativeDriver: !IS_WEB,
       }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 1200,
-        useNativeDriver: !IS_WEB,
-      }),
     ]).start();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[StyleSheet.absoluteFill, { transform: [{ scale: scaleAnim }] }]}>
-        <Image
-          source={require("@/assets/images/hero_calakmul.png")}
-          style={StyleSheet.absoluteFill}
-          contentFit="cover"
-        />
-      </Animated.View>
+      <Image
+        source={require("@/assets/images/pyramid_front.jpeg")}
+        style={StyleSheet.absoluteFill}
+        contentFit="cover"
+      />
 
       <View style={[StyleSheet.absoluteFill, { backgroundColor: colors.heroOverlay }]} />
 
@@ -64,13 +56,13 @@ export default function HeroSection({ onExplorePress }: HeroSectionProps) {
         ]}
       >
         <View style={styles.badge}>
-          <Feather name="map-pin" size={12} color="#ffffff" />
-          <Text style={styles.badgeText}>Campeche, México</Text>
+          <Feather name="map-pin" size={12} color="#a8f0c6" />
+          <Text style={styles.badgeText}>Calakmul, Campeche, México</Text>
         </View>
 
         <Text style={styles.title}>Descubre{"\n"}Calakmul</Text>
         <Text style={styles.subtitle}>
-          La gran ciudad de la serpiente con dos cabezas. Patrimonio de la Humanidad.
+          La gran ciudad maya. Patrimonio Mundial de la UNESCO en el corazón de Campeche.
         </Text>
 
         <View style={styles.statsRow}>
@@ -81,7 +73,7 @@ export default function HeroSection({ onExplorePress }: HeroSectionProps) {
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
             <Text style={styles.statNumber}>7,000</Text>
-            <Text style={styles.statLabel}>Km² de selva</Text>
+            <Text style={styles.statLabel}>Km² de biosfera</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
@@ -120,7 +112,7 @@ const styles = StyleSheet.create({
   badge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.15)",
+    backgroundColor: "rgba(255,255,255,0.13)",
     alignSelf: "flex-start",
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -129,10 +121,10 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   badgeText: {
-    color: "#ffffff",
+    color: "#a8f0c6",
     fontSize: 12,
-    fontFamily: "Inter_500Medium",
-    letterSpacing: 0.5,
+    fontFamily: "Inter_600SemiBold",
+    letterSpacing: 0.4,
   },
   title: {
     color: "#ffffff",
@@ -147,12 +139,12 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     lineHeight: 22,
     marginBottom: 28,
-    maxWidth: "85%",
+    maxWidth: "88%",
   },
   statsRow: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(255,255,255,0.14)",
     borderRadius: 14,
     paddingVertical: 14,
     paddingHorizontal: 8,
@@ -163,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   statNumber: {
-    color: "#ffffff",
+    color: "#a8f0c6",
     fontSize: 20,
     fontFamily: "Inter_700Bold",
   },
@@ -186,10 +178,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 14,
     gap: 10,
-    shadowColor: "#1a6b3c",
-    shadowOpacity: 0.5,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 4 },
     elevation: 6,
   },
   exploreBtnText: {

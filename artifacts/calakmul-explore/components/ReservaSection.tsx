@@ -6,20 +6,22 @@ import {
   TextInput,
   TouchableOpacity,
   Linking,
-  ScrollView,
   Alert,
 } from "react-native";
+import { Image } from "expo-image";
 import { Feather } from "@expo/vector-icons";
 import { useColors } from "@/hooks/useColors";
 import SectionTitle from "./SectionTitle";
+import WildlifeTrack from "./WildlifeTrack";
 
 const TOURS = [
   "Tour Zona Arqueológica Calakmul",
-  "Tour Cueva de los Murciélagos",
-  "Tour Balamkú + Chicannà",
+  "Tour Chicannà + Balamkú",
+  "Tour Lagunas de la Biosfera",
+  "Tour Xpuhil + Becán",
   "Paquete 2 días todo incluido",
   "Paquete 3 días todo incluido",
-  "Tour Observación de Aves",
+  "Tour Observación de Aves y Fauna",
   "Tour Fotográfico Arqueológico",
 ];
 
@@ -40,19 +42,27 @@ export default function ReservaSection() {
       return;
     }
 
-    const message = `Hola, quiero reservar un tour 👋\n\n👤 Nombre: ${name}\n🧭 Tour: ${TOURS[tourIdx]}\n📅 Fecha: ${date}`;
+    const message = `Hola, quiero reservar un tour 👋\n\n👤 Nombre: ${name}\n🧭 Tour: ${TOURS[tourIdx]}\n📅 Fecha: ${date}\n📍 Calakmul, Campeche, México`;
     const phone = "521982105306";
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     Linking.openURL(url);
   };
 
   return (
-    <View style={[styles.section, { backgroundColor: colors.sectionBg3 }]}>
-      <View style={styles.titleWrap}>
-        <SectionTitle
-          title="Reserva Tu Tour"
-          subtitle="Contáctanos directamente por WhatsApp para confirmar tu aventura"
+    <View style={[styles.section, { backgroundColor: colors.sectionBg2 }]}>
+      <WildlifeTrack color="#2d9e5f" opacity={0.1} />
+
+      <View style={styles.photoBanner}>
+        <Image
+          source={require("@/assets/images/ruins_entrance.jpeg")}
+          style={styles.bannerImg}
+          contentFit="cover"
         />
+        <View style={[styles.bannerOverlay, { backgroundColor: colors.primary }]}>
+          <Feather name="calendar" size={20} color="#ffffff" />
+          <Text style={styles.bannerTitle}>Reserva Tu Tour</Text>
+          <Text style={styles.bannerSub}>Calakmul, Campeche, México</Text>
+        </View>
       </View>
 
       <View style={[styles.formCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
@@ -142,24 +152,8 @@ export default function ReservaSection() {
         </TouchableOpacity>
 
         <Text style={[styles.hint, { color: colors.mutedForeground }]}>
-          Te responderemos en menos de 24 horas
+          Te responderemos en menos de 24 horas · Calakmul, Campeche
         </Text>
-      </View>
-
-      <View style={[styles.contactCard, { backgroundColor: colors.primary }]}>
-        <Text style={styles.contactTitle}>También puedes contactarnos</Text>
-        <View style={styles.contactRow}>
-          <Feather name="phone" size={16} color="rgba(255,255,255,0.8)" />
-          <Text style={styles.contactText}>+52 982 105 3064</Text>
-        </View>
-        <View style={styles.contactRow}>
-          <Feather name="mail" size={16} color="rgba(255,255,255,0.8)" />
-          <Text style={styles.contactText}>info@calakmulexplore.com</Text>
-        </View>
-        <View style={styles.contactRow}>
-          <Feather name="map-pin" size={16} color="rgba(255,255,255,0.8)" />
-          <Text style={styles.contactText}>Xpujil, Campeche, México</Text>
-        </View>
       </View>
     </View>
   );
@@ -168,20 +162,44 @@ export default function ReservaSection() {
 const styles = StyleSheet.create({
   section: {
     paddingVertical: 36,
+    overflow: "hidden",
   },
-  titleWrap: {
-    paddingHorizontal: 20,
+  photoBanner: {
+    marginHorizontal: 20,
+    borderRadius: 16,
+    overflow: "hidden",
+    height: 130,
+    marginBottom: 20,
+    flexDirection: "row",
+  },
+  bannerImg: {
+    flex: 1,
+    height: "100%",
+  },
+  bannerOverlay: {
+    width: "42%",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 14,
+    gap: 6,
+  },
+  bannerTitle: {
+    color: "#ffffff",
+    fontSize: 15,
+    fontFamily: "Inter_700Bold",
+    textAlign: "center",
+  },
+  bannerSub: {
+    color: "rgba(255,255,255,0.8)",
+    fontSize: 10,
+    fontFamily: "Inter_400Regular",
+    textAlign: "center",
   },
   formCard: {
     marginHorizontal: 20,
     borderRadius: 18,
     borderWidth: 1,
     padding: 20,
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOpacity: 0.06,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 3 },
     elevation: 3,
   },
   fieldWrap: {
@@ -214,10 +232,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 6,
     overflow: "hidden",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
     elevation: 5,
     zIndex: 100,
   },
@@ -242,10 +256,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 14,
     marginTop: 4,
-    shadowColor: "#25D366",
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
     elevation: 5,
   },
   submitBtnText: {
@@ -258,27 +268,5 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     textAlign: "center",
     marginTop: 12,
-  },
-  contactCard: {
-    marginHorizontal: 20,
-    borderRadius: 18,
-    padding: 20,
-    gap: 12,
-  },
-  contactTitle: {
-    color: "#ffffff",
-    fontSize: 15,
-    fontFamily: "Inter_700Bold",
-    marginBottom: 4,
-  },
-  contactRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  contactText: {
-    color: "rgba(255,255,255,0.85)",
-    fontSize: 14,
-    fontFamily: "Inter_400Regular",
   },
 });
